@@ -23,7 +23,7 @@ const Hero = () => {
                             <Play size={18} />
                             Put my shorts on autopilot
                         </a>
-                        <a href="#contact" className="btn btn-ghost">
+                        <a href="#portfolio" className="btn btn-ghost">
                             Show me samples
                             <ArrowRight size={18} />
                         </a>
