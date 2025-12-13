@@ -59,6 +59,25 @@ const Portfolio = () => {
                 },
             ],
         },
+        {
+            id: 'twitch-gaming',
+            title: 'Twitch gaming shorts',
+            description: 'High-energy Twitch moments cut down for Shorts with captions and pacing tuned for gaming audiences.',
+            videos: [
+                {
+                    title: 'Twitch gaming short 1',
+                    url: 'https://streamable.com/e/clb41s',
+                },
+                {
+                    title: 'Twitch gaming short 2',
+                    url: 'https://streamable.com/e/zry4ha',
+                },
+                {
+                    title: 'Twitch gaming short 3',
+                    url: 'https://streamable.com/e/an0jvj',
+                },
+            ],
+        },
     ];
 
     const renderVideo = (video, extraClass = '') => (
