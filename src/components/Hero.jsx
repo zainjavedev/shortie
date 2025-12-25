@@ -10,7 +10,10 @@ const Hero = () => {
 
                     <h1 className="hero-title">
                         <span className="hero-line">Start your content</span>
-                        <span className="hero-line">journey for just $5.</span>
+                        <span className="hero-line">
+                            journey{' '}
+                            <span className="highlight">for just $5.</span>
+                        </span>
                     </h1>
 
                     <p className="lead">
