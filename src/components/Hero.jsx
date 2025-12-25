@@ -6,12 +6,11 @@ const Hero = () => {
         <section className="hero">
             <div className="container hero-grid">
                 <div className="hero-copy">
-                    <span className="eyebrow">Automate your content creation</span>
+                    <span className="eyebrow">Start your content journey</span>
 
                     <h1 className="hero-title">
-                        10 shorts in 7 days
-                        {' '}
-                        <span className="highlight">starting from $20.</span>
+                        <span className="hero-line">Start your content</span>
+                        <span className="hero-line">journey for just $5.</span>
                     </h1>
 
                     <p className="lead">
@@ -19,12 +18,12 @@ const Hero = () => {
                     </p>
 
                     <div className="cta-row">
-                        <a href="#portfolio" className="btn btn-primary">
+                        <a href="#pricing" className="btn btn-primary">
                             <Play size={18} />
-                            Put my shorts on autopilot
+                            Start with a plan
                         </a>
                         <a href="#portfolio" className="btn btn-ghost">
-                            Show me samples
+                            See samples
                             <ArrowRight size={18} />
                         </a>
                     </div>

@@ -319,6 +319,10 @@ h1, h2, h3, h4 {
   margin: 1rem 0;
 }
 
+.hero-line {
+  display: block;
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;
@@ -623,6 +627,91 @@ h1, h2, h3, h4 {
   font-size: 0.95rem;
 }
 
+/* Pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.pricing-card {
+  padding: 1.7rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-card.is-recommended {
+  border-color: rgba(244, 93, 72, 0.45);
+  box-shadow: 0 20px 50px rgba(244, 93, 72, 0.18);
+}
+
+.pricing-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.pricing-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.price-amount {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.price-term {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.pricing-desc {
+  color: var(--text-secondary);
+}
+
+.pricing-list {
+  display: grid;
+  gap: 0.55rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.pricing-list li {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.pricing-list li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+}
+
+.pricing-card .btn {
+  justify-content: center;
+  width: 100%;
+}
+
 /* Portfolio */
 .portfolio-grid {
   display: grid;
@@ -919,6 +1008,10 @@ button:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .portfolio-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -957,6 +1050,12 @@ button:disabled {
   }
 }
 
+@media (max-width: 900px) {
+  .process-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 720px) {
   .section {
     padding: 4rem 0;
@@ -974,6 +1073,7 @@ button:disabled {
 
   .stat-grid,
   .service-grid,
+  .pricing-grid,
   .portfolio-grid,
   .portfolio-videos,
   .ai-visuals-group .portfolio-videos,
@@ -988,5 +1088,17 @@ button:disabled {
   .contact-form,
   .cta-card {
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-title {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.85rem;
   }
 }

@@ -3,7 +3,7 @@ import { useForm } from '@formspree/react';
 import { Mail, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', service: '', notes: '' });
+    const [form, setForm] = useState({ name: '', email: '', service: '', plan: '', notes: '' });
     const [errors, setErrors] = useState({});
     const [state, submitToFormspree] = useForm('mblnjvoo');
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,6 +24,7 @@ const Contact = () => {
             nextErrors.email = 'Enter a valid email.';
         }
         if (!form.service) nextErrors.service = 'Pick a service.';
+        if (!form.plan) nextErrors.plan = 'Pick a plan.';
         if (!form.notes.trim()) nextErrors.notes = 'Tell us what you need or share links.';
         return nextErrors;
     };
@@ -44,7 +45,7 @@ const Contact = () => {
     useEffect(() => {
         if (state.succeeded) {
             alert('Email sent successfully!');
-            setForm({ name: '', email: '', service: '', notes: '' });
+            setForm({ name: '', email: '', service: '', plan: '', notes: '' });
             setErrors({});
             setIsSubmitted(true);
             if (typeof window !== 'undefined') {
@@ -124,13 +125,30 @@ const Contact = () => {
                                 onChange={handleChange('service')}
                             >
                                 <option value="" disabled>Select service</option>
-                            <option>Long form → short form</option>
-                            <option>AI storytelling video</option>
-                            <option>AI visual concepts</option>
-                            <option>UGC-style ad</option>
-                        </select>
-                        {errors.service && <span className="error-text">{errors.service}</span>}
-                    </label>
+                                <option>Long form → short form</option>
+                                <option>AI storytelling video</option>
+                                <option>AI visual concepts</option>
+                                <option>UGC-style ad</option>
+                                <option>Marketing reels</option>
+                            </select>
+                            {errors.service && <span className="error-text">{errors.service}</span>}
+                        </label>
+                        <label className="form-group">
+                            <span className="input-label">Plan interest</span>
+                            <select
+                                className={`select ${errors.plan ? 'input-error' : ''}`}
+                                name="plan"
+                                value={form.plan}
+                                onChange={handleChange('plan')}
+                            >
+                                <option value="" disabled>Select a plan</option>
+                                <option>Single short - $5</option>
+                                <option>Weekly - 7 shorts for $30</option>
+                                <option>Monthly - 30 shorts for $100</option>
+                                <option>Not sure yet</option>
+                            </select>
+                            {errors.plan && <span className="error-text">{errors.plan}</span>}
+                        </label>
                         <label className="form-group">
                         <span className="input-label">What you need help with</span>
                         <textarea
