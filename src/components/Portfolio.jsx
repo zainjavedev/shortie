@@ -78,6 +78,25 @@ const Portfolio = () => {
                 },
             ],
         },
+        {
+            id: 'marketing-reels',
+            title: 'Clothing brand marketing reels',
+            description: 'Punchy product-first reels built for fashion drops, launches, and paid social.',
+            videos: [
+                {
+                    title: 'Clothing brand reel 1',
+                    url: 'https://streamable.com/e/goh9v2',
+                },
+                {
+                    title: 'Clothing brand reel 2',
+                    url: 'https://streamable.com/e/99l9wq',
+                },
+                {
+                    title: 'Clothing brand reel 3',
+                    url: 'https://streamable.com/e/eq259y',
+                },
+            ],
+        },
     ];
 
     const renderVideo = (video, extraClass = '') => (
