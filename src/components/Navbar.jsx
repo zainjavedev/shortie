@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Sparkles, X } from 'lucide-react';
+import { Menu, Sparkles, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isPricingPage = typeof window !== 'undefined' && window.location.pathname.includes('pricing');
+  const baseHref = isPricingPage ? '/' : '';
+  const pricingHref = isPricingPage ? '#pricing' : '/pricing.html';
+  const contactHref = isPricingPage ? '#pricing-contact' : '#contact';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,43 +18,35 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#top' },
-    { name: 'Services', href: '#services' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'How it works', href: `${baseHref}#services` },
+    { name: 'Portfolio', href: `${baseHref}#portfolio`, hasDropdown: true },
+    { name: 'Pricing', href: pricingHref },
+    { name: 'Blog', href: contactHref },
   ];
 
   return (
     <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`} id="top">
       <div className="container nav-inner">
-        <a href="#" className="brand">
+        <a href={isPricingPage ? '/' : '#'} className="brand">
           <span className="brand-mark">
             <Sparkles size={18} />
           </span>
-          <span className="brand-text">
-            <span className="brand-name">Shortie</span>
-            <span className="brand-sub">Short-form studio</span>
-          </span>
+          <span className="brand-name">Shortie</span>
         </a>
 
         <div className="nav-links">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-            >
+            <a key={link.name} href={link.href} className="nav-link-item">
               {link.name}
+              {link.hasDropdown && <ChevronDown size={14} />}
             </a>
           ))}
         </div>
 
         <div className="nav-actions">
-          <a href="#portfolio" className="btn btn-ghost">
-            See work
-          </a>
-          <a href="#contact" className="btn btn-primary">
-            Book a slot
+          <a href={contactHref} className="btn btn-nav-cta">
+            Get Started
+            <span className="nav-cta-arrow">›</span>
           </a>
         </div>
 
@@ -72,11 +68,11 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#contact"
-            className="btn btn-primary"
+            href={contactHref}
+            className="btn btn-nav-cta"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Book a slot
+            Get Started
           </a>
         </div>
       )}

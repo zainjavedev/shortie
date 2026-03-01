@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from '@formspree/react';
 import { Mail, Instagram, Youtube, Twitter } from 'lucide-react';
 
-const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', service: '', plan: '', notes: '' });
+const Contact = ({ id = 'contact', subject = 'Footer contact - Shortie lead', source = 'Footer form' }) => {
+    const [form, setForm] = useState({ message: '' });
     const [errors, setErrors] = useState({});
     const [state, submitToFormspree] = useForm('mblnjvoo');
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,15 +17,7 @@ const Contact = () => {
 
     const validate = () => {
         const nextErrors = {};
-        if (!form.name.trim()) nextErrors.name = 'Name is required.';
-        if (!form.email.trim()) {
-            nextErrors.email = 'Email is required.';
-        } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) {
-            nextErrors.email = 'Enter a valid email.';
-        }
-        if (!form.service) nextErrors.service = 'Pick a service.';
-        if (!form.plan) nextErrors.plan = 'Pick a plan.';
-        if (!form.notes.trim()) nextErrors.notes = 'Tell us what you need or share links.';
+        if (!form.message.trim()) nextErrors.message = 'Drop a handle or link so we can reach you.';
         return nextErrors;
     };
 
@@ -45,7 +37,7 @@ const Contact = () => {
     useEffect(() => {
         if (state.succeeded) {
             alert('Email sent successfully!');
-            setForm({ name: '', email: '', service: '', plan: '', notes: '' });
+            setForm({ message: '' });
             setErrors({});
             setIsSubmitted(true);
             if (typeof window !== 'undefined') {
@@ -55,7 +47,7 @@ const Contact = () => {
     }, [state.succeeded]);
 
     return (
-        <footer id="contact" className="contact">
+        <footer id={id} className="contact">
             <div className="container contact-grid">
                 <div className="cta-card centered">
                     <span className="eyebrow">Let's talk</span>
@@ -86,87 +78,30 @@ const Contact = () => {
                     </div>
                 ) : (
                     <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                        <input type="hidden" name="_subject" value={subject} />
+                        <input type="hidden" name="source" value={source} />
                         <div className="form-head">
-                            <div className="form-title">Send your project</div>
-                            <p className="form-subtitle">Links welcome, or describe the vibe you want.</p>
-                        </div>
-                        <div className="form-grid">
-                            <label className="form-group">
-                                <span className="input-label">Name</span>
-                                <input
-                                    type="text"
-                                    placeholder="Your name"
-                                    name="name"
-                                    className={`input ${errors.name ? 'input-error' : ''}`}
-                                    value={form.name}
-                                    onChange={handleChange('name')}
-                                />
-                                {errors.name && <span className="error-text">{errors.name}</span>}
-                            </label>
-                            <label className="form-group">
-                                <span className="input-label">Email</span>
-                                <input
-                                    type="email"
-                                    placeholder="name@email.com"
-                                    name="email"
-                                    className={`input ${errors.email ? 'input-error' : ''}`}
-                                    value={form.email}
-                                    onChange={handleChange('email')}
-                                />
-                                {errors.email && <span className="error-text">{errors.email}</span>}
-                            </label>
+                            <div className="form-title">Drop your best contact</div>
+                            <p className="form-subtitle">Discord, Reddit, WhatsApp, IG - anything. We'll find you and text you :)</p>
                         </div>
                         <label className="form-group">
-                            <span className="input-label">What you need</span>
-                            <select
-                                className={`select ${errors.service ? 'input-error' : ''}`}
-                                name="service"
-                                value={form.service}
-                                onChange={handleChange('service')}
-                            >
-                                <option value="" disabled>Select service</option>
-                                <option>Long form → short form</option>
-                                <option>AI storytelling video</option>
-                                <option>AI visual concepts</option>
-                                <option>UGC-style ad</option>
-                                <option>Marketing reels</option>
-                            </select>
-                            {errors.service && <span className="error-text">{errors.service}</span>}
-                        </label>
-                        <label className="form-group">
-                            <span className="input-label">Plan interest</span>
-                            <select
-                                className={`select ${errors.plan ? 'input-error' : ''}`}
-                                name="plan"
-                                value={form.plan}
-                                onChange={handleChange('plan')}
-                            >
-                                <option value="" disabled>Select a plan</option>
-                                <option>Single short - $5</option>
-                                <option>Weekly - 7 shorts for $30</option>
-                                <option>Monthly - 30 shorts for $100</option>
-                                <option>Not sure yet</option>
-                            </select>
-                            {errors.plan && <span className="error-text">{errors.plan}</span>}
-                        </label>
-                        <label className="form-group">
-                        <span className="input-label">What you need help with</span>
-                        <textarea
-                            placeholder="Tell us what you need help with—getting started, cutting shorts, or ideas."
-                            rows="4"
-                            name="message"
-                            className={`textarea ${errors.notes ? 'input-error' : ''}`}
-                            value={form.notes}
-                            onChange={handleChange('notes')}
+                            <span className="input-label">What kind of shorts do you want, and how should we reach you?</span>
+                            <textarea
+                                placeholder="e.g. Discord: yourname#0001, WhatsApp: +1 555 123 4567, Reddit: u/yourname"
+                                rows="6"
+                                name="message"
+                                className={`textarea ${errors.message ? 'input-error' : ''}`}
+                                value={form.message}
+                                onChange={handleChange('message')}
                             />
-                            {errors.notes && <span className="error-text">{errors.notes}</span>}
+                            {errors.message && <span className="error-text">{errors.message}</span>}
                         </label>
                         <div className="form-note">
-                            Replies within one business day. No spam, ever.
+                            We reply within one business day. No spam, ever.
                             {state.succeeded && <span className="form-note success-text"> Thanks! We got it.</span>}
                         </div>
                         <button className="btn btn-primary" type="submit" disabled={state.submitting}>
-                            {state.submitting ? 'Sending…' : 'Send my project'}
+                            {state.submitting ? 'Sending…' : 'Send message'}
                         </button>
                     </form>
                 )}

@@ -1,161 +1,108 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+const ALL_VIDEOS = [
+  { id: 1,  title: 'AI horror storytelling cut', url: 'https://www.youtube.com/embed/w-OH4jS7Fr4?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Storytelling' },
+  { id: 17, title: 'Horror story short',         url: 'https://www.youtube.com/embed/1309fUMoSuQ?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Storytelling' },
+  { id: 2,  title: 'AI crime story short',       url: 'https://streamable.com/e/2pizq8',                         category: 'Storytelling' },
+  { id: 3, title: 'AI urban legend story',       url: 'https://streamable.com/e/4alsq6',                         category: 'Storytelling' },
+  { id: 4, title: 'AI F1 race in Monaco',        url: 'https://streamable.com/e/z3f4rt',                         category: 'AI Visuals'   },
+  { id: 5, title: 'AI UGC-style ad',             url: 'https://streamable.com/e/jcm2v3',                         category: 'AI Visuals'   },
+  { id: 6, title: 'AI driver creative short',    url: 'https://www.youtube.com/embed/QHyS9BfJ9nY?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'AI Visuals'   },
+  { id: 7, title: 'MrBeast challenge → short',   url: 'https://www.youtube.com/embed/iQiezs84dQc?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Long → Short' },
+  { id: 8, title: 'Challenge clip → short',      url: 'https://www.youtube.com/embed/4mbfyMiJJBg?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Long → Short' },
+  { id: 9, title: 'Challenge short (alt)',        url: 'https://www.youtube.com/embed/8M8IGcJgXIw?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Long → Short' },
+  { id: 10, title: 'Twitch gaming short 1',      url: 'https://streamable.com/e/clb41s',                         category: 'Gaming'       },
+  { id: 11, title: 'Twitch gaming short 2',      url: 'https://streamable.com/e/zry4ha',                         category: 'Gaming'       },
+  { id: 12, title: 'Twitch gaming short 3',      url: 'https://streamable.com/e/an0jvj',                         category: 'Gaming'       },
+  { id: 13, title: 'Clothing brand reel 1',      url: 'https://streamable.com/e/goh9v2',                         category: 'Marketing'    },
+  { id: 14, title: 'Clothing brand reel 2',      url: 'https://streamable.com/e/99l9wq',                         category: 'Marketing'    },
+  { id: 15, title: 'Clothing brand reel 3',      url: 'https://streamable.com/e/eq259y',                         category: 'Marketing'    },
+  { id: 18, title: 'Gym reel 1',                url: 'https://streamable.com/e/10cghh',                         category: 'Fitness'      },
+  { id: 19, title: 'Gym reel 2',                url: 'https://streamable.com/e/x24v3k',                         category: 'Fitness'      },
+];
+
+const FILTERS = ['All', 'Storytelling', 'AI Visuals', 'Long → Short', 'Gaming', 'Marketing', 'Fitness'];
 
 const Portfolio = () => {
-    const sections = [
-        {
-            id: 'storytelling-shorts',
-            title: 'Storytelling shorts',
-            description: 'Narrative-driven shorts with captions and pacing dialed for TikTok/Shorts.',
-            videos: [
-                {
-                    title: 'AI horror storytelling cut 2',
-                    url: 'https://www.youtube.com/embed/w-OH4jS7Fr4?feature=share',
-                },
-                {
-                    title: 'AI crime story short',
-                    url: 'https://streamable.com/e/2pizq8',
-                },
-                {
-                    title: 'AI urban legend story',
-                    url: 'https://streamable.com/e/4alsq6',
-                },
-            ],
-        },
-        {
-            id: 'ai-visuals',
-            title: 'AI-generated visuals',
-            description: 'AI concept shorts and visual-heavy hooks ready for paid or organic.',
-            videos: [
-                {
-                    title: 'AI F1 race in Monaco',
-                    url: 'https://streamable.com/e/z3f4rt',
-                },
-                {
-                    title: 'AI UGC-style ad (realistic)',
-                    url: 'https://streamable.com/e/jcm2v3',
-                },
-                {
-                    title: 'AI driver (creative short 2)',
-                    url: 'https://www.youtube.com/embed/QHyS9BfJ9nY?feature=share',
-                },
-            ],
-        },
-        {
-            id: 'long-to-short',
-            title: 'Long-form to short',
-            description: 'Podcasts or interviews cut down with captions, pacing, and hooks.',
-            videos: [
-                {
-                    title: 'MrBeast challenge → short with captions',
-                    url: 'https://www.youtube.com/embed/iQiezs84dQc?rel=0',
-                },
-                {
-                    title: 'Challenge clip → short with captions',
-                    url: 'https://www.youtube.com/embed/4mbfyMiJJBg?feature=share',
-                },
-                {
-                    title: 'Challenge short with captions (alt)',
-                    url: 'https://www.youtube.com/embed/8M8IGcJgXIw',
-                },
-            ],
-        },
-        {
-            id: 'twitch-gaming',
-            title: 'Twitch gaming shorts',
-            description: 'High-energy Twitch moments cut down for Shorts with captions and pacing tuned for gaming audiences.',
-            videos: [
-                {
-                    title: 'Twitch gaming short 1',
-                    url: 'https://streamable.com/e/clb41s',
-                },
-                {
-                    title: 'Twitch gaming short 2',
-                    url: 'https://streamable.com/e/zry4ha',
-                },
-                {
-                    title: 'Twitch gaming short 3',
-                    url: 'https://streamable.com/e/an0jvj',
-                },
-            ],
-        },
-        {
-            id: 'marketing-reels',
-            title: 'Clothing brand marketing reels',
-            description: 'Punchy product-first reels built for fashion drops, launches, and paid social.',
-            videos: [
-                {
-                    title: 'Clothing brand reel 1',
-                    url: 'https://streamable.com/e/goh9v2',
-                },
-                {
-                    title: 'Clothing brand reel 2',
-                    url: 'https://streamable.com/e/99l9wq',
-                },
-                {
-                    title: 'Clothing brand reel 3',
-                    url: 'https://streamable.com/e/eq259y',
-                },
-            ],
-        },
-    ];
+  const [active, setActive] = useState('All');
+  const [isShuffling, setIsShuffling] = useState(false);
+  const shuffleTimeoutRef = useRef(null);
 
-    const renderVideo = (video, extraClass = '') => (
-        <div key={video.url} className={`portfolio-video ${extraClass}`}>
-            <div
-                className={`portfolio-embed${video.ratio ? ' wide' : ''}`}
-                style={video.ratio ? { aspectRatio: video.ratio } : {}}
-            >
-                <iframe
-                    src={video.url}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                />
-            </div>
-            <div className="portfolio-meta">
-                <div className="portfolio-title">{video.title}</div>
-            </div>
+  const visible = active === 'All'
+    ? ALL_VIDEOS
+    : ALL_VIDEOS.filter(v => v.category === active);
+
+  useEffect(() => {
+    if (!isShuffling) {
+      return undefined;
+    }
+    if (shuffleTimeoutRef.current) {
+      clearTimeout(shuffleTimeoutRef.current);
+    }
+    shuffleTimeoutRef.current = setTimeout(() => {
+      setIsShuffling(false);
+    }, 650);
+    return () => clearTimeout(shuffleTimeoutRef.current);
+  }, [isShuffling]);
+
+  const handleFilterClick = next => {
+    if (next === active) {
+      return;
+    }
+    setActive(next);
+    setIsShuffling(true);
+  };
+
+  return (
+    <section id="portfolio" className="samples-section section">
+      <div className="container">
+        <div className="section-header">
+          <span className="eyebrow samples-eyebrow">Our Work</span>
+          <h2 className="heading-lg samples-heading">Sample shorts <span className="samples-highlight">by format</span></h2>
+          <p className="section-subtitle samples-subtitle">
+            Story-led AI cuts, long-to-short edits, and visual-first clips. Filter by type and watch.
+          </p>
         </div>
-    );
 
-    return (
-        <section id="portfolio" className="section">
-            <div className="container">
-                <div className="section-header">
-                    <span className="eyebrow">Proof of play</span>
-                    <h2 className="heading-lg">Sample shorts by format</h2>
-                    <p className="section-subtitle">
-                        Story-led AI cuts, long-to-short edits, and visual-first clips grouped by format. Jump in and watch.
-                    </p>
-                </div>
+        {/* Filter tabs */}
+        <div className="samples-filters">
+          {FILTERS.map(f => (
+            <button
+              key={f}
+              className={`samples-filter-btn${active === f ? ' active' : ''}`}
+              onClick={() => handleFilterClick(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
 
-                <div className="portfolio-sections">
-                    {sections.map((section) => (
-                        // Add group-specific class hooks for layout tweaks
-                        <div
-                            key={section.id}
-                            className={`portfolio-group ${
-                                section.id === 'ai-visuals' ? 'ai-visuals-group' : ''
-                            } ${section.id === 'long-to-short' ? 'long-group' : ''}`}
-                            id={section.id}
-                        >
-                            <div className="portfolio-group-header">
-                                <div>
-                                    <div className="portfolio-label">
-                                        <span className="chip play-chip">{section.title}</span>
-                                    </div>
-                                    <div className="portfolio-title">{section.description}</div>
-                                </div>
-                            </div>
-                            <div className="portfolio-videos">
-                                {section.videos.map((video) => renderVideo(video))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+        {/* Video grid */}
+        <div className={`samples-grid${isShuffling ? ' is-shuffling' : ''}`}>
+          {visible.map((video, index) => (
+            <div
+              key={video.id}
+              className="sample-card"
+              style={{ '--shuffle-index': index }}
+            >
+              <div className={`sample-embed${video.isInstagram ? ' sample-embed-ig' : ''}`}>
+                <iframe
+                  src={video.url}
+                  title={video.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="sample-meta">
+                <span className="sample-category">{video.category}</span>
+                <p className="sample-title">{video.title}</p>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Portfolio;
