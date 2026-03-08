@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         pricing: resolve(__dirname, 'pricing.html'),
+        blog: resolve(__dirname, 'blog.html'),
+        'blog-viral': resolve(__dirname, 'blog/how-to-go-viral-with-short-form-content.html'),
       },
     },
   },

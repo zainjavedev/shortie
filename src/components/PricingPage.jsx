@@ -1,19 +1,18 @@
 import React from 'react';
-import Navbar from './Navbar';
-import LeadPopup from './LeadPopup';
+import Layout from './Layout';
 import Contact from './Contact';
 
 const PRICING_TIERS = [
   {
     title: 'Storytelling Shorts',
-    price: '$50/mo',
+    price: '$150/mo',
     description: '30 storytelling videos per month. We post for you too.',
     perks: ['30 videos per month', 'Story-led edits', 'Posting included'],
     cta: { label: 'Start storytelling', href: '#pricing-contact' },
   },
   {
     title: 'AI Influencer Videos',
-    price: '$50/mo',
+    price: '$150/mo',
     description: '3 AI influencer videos per week, built for scroll-stopping hooks.',
     perks: ['3 videos per week', 'AI influencer style', 'Optimized formats'],
     cta: { label: 'Get AI influencer', href: '#pricing-contact' },
@@ -28,9 +27,7 @@ const PRICING_TIERS = [
 ];
 
 const PricingPage = () => (
-  <div className="page pricing-page">
-    <Navbar />
-    <LeadPopup />
+  <Layout className="pricing-page">
     <main>
       <section id="pricing" className="pricing-section section">
         <div className="container">
@@ -70,7 +67,7 @@ const PricingPage = () => (
       subject="Pricing page - Shortie lead"
       source="Pricing page form"
     />
-  </div>
+  </Layout>
 );
 
 export default PricingPage;

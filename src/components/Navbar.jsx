@@ -21,7 +21,7 @@ const Navbar = () => {
     { name: 'How it works', href: `${baseHref}#services` },
     { name: 'Portfolio', href: `${baseHref}#portfolio`, hasDropdown: true },
     { name: 'Pricing', href: pricingHref },
-    { name: 'Blog', href: contactHref },
+    { name: 'Blog', href: '/blog.html' },
   ];
 
   return (

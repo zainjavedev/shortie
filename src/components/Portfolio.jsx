@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const ALL_VIDEOS = [
   { id: 1,  title: 'AI horror storytelling cut', url: 'https://www.youtube.com/embed/w-OH4jS7Fr4?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Storytelling' },
   { id: 17, title: 'Horror story short',         url: 'https://www.youtube.com/embed/1309fUMoSuQ?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0', category: 'Storytelling' },
-  { id: 2,  title: 'AI crime story short',       url: 'https://streamable.com/e/2pizq8',                         category: 'Storytelling' },
   { id: 3, title: 'AI urban legend story',       url: 'https://streamable.com/e/4alsq6',                         category: 'Storytelling' },
   { id: 4, title: 'AI F1 race in Monaco',        url: 'https://streamable.com/e/z3f4rt',                         category: 'AI Visuals'   },
   { id: 5, title: 'AI UGC-style ad',             url: 'https://streamable.com/e/jcm2v3',                         category: 'AI Visuals'   },

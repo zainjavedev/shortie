@@ -1,10 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Bot, Film, Music, Layers, Zap } from 'lucide-react';
-import Navbar from './components/Navbar';
+import { Bot, Film, Music, Layers, Zap, ArrowRight, Scissors, Sparkles, BookOpen, Captions, Volume2, ShoppingBag, Palette, TrendingUp } from 'lucide-react';
+import Layout from './components/Layout';
 import Hero from './components/Hero';
-import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
-import LeadPopup from './components/LeadPopup';
 
 const WITHOUT_PATH = "M10,78 L35,92 L60,58 L85,108 L110,52 L135,98 L160,68 L185,88 L210,62 L235,94 L258,72 L270,106";
 const WITH_PATH    = "M10,128 L45,116 L80,102 L115,86 L150,66 L185,46 L220,26 L255,12 L270,7";
@@ -25,9 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
-      <Navbar />
-      <LeadPopup />
+    <Layout>
       <main>
         <Hero />
         <section className="showreel-section">
@@ -62,6 +58,29 @@ function App() {
                     title="Shortie showreel"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="ugc-section section">
+          <div className="container">
+            <div className="section-header">
+              <span className="eyebrow ugc-eyebrow">AI UGC Ads</span>
+              <h2 className="heading-lg ugc-heading">Very Real-Looking Models to <span className="ugc-highlight">Promote Your Product</span></h2>
+              <p className="section-subtitle ugc-subtitle">
+                AI-generated UGC-style ads that look and feel like real influencer content — perfect for promoting your app, product, or brand without hiring talent.
+              </p>
+            </div>
+            <div className="ugc-video-wrapper">
+              <div className="ugc-video-embed">
+                <iframe
+                  src="https://streamable.com/e/jcm2v3"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  frameBorder="0"
+                  title="AI UGC-style ad"
+                />
               </div>
             </div>
           </div>
@@ -158,10 +177,125 @@ function App() {
           </div>
         </section>
 
-        <Portfolio />
+        {/* Clipping — info LEFT, reel RIGHT */}
+        <section id="portfolio" className="reel-section reel-section--dark section">
+          <div className="container">
+            <div className="reel-layout">
+              <div className="reel-info">
+                <span className="eyebrow reel-eyebrow">Long → Short</span>
+                <h2 className="heading-lg reel-heading">Turn Streams Into <span className="reel-highlight">Viral Clips</span></h2>
+                <p className="lead reel-desc">We clip the best moments from your streams and long-form content into scroll-stopping shorts that blow up everywhere.</p>
+                <ul className="reel-checks">
+                  {[
+                    { icon: <Scissors size={16} />, text: 'Best moments clipped automatically' },
+                    { icon: <Sparkles size={16} />, text: 'Gen Z editing style & trends' },
+                    { icon: <Zap size={16} />, text: 'Optimized for TikTok, Shorts & Reels' },
+                    { icon: <TrendingUp size={16} />, text: 'Built to make streamers go viral' },
+                  ].map((item) => (
+                    <li key={item.text} className="reel-check">
+                      <span className="check-icon">{item.icon}</span>
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="btn btn-primary">
+                  Start Clipping My Content <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="reel-video">
+                <div className="reel-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/iQiezs84dQc?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
+                    title="MrBeast challenge → short"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Storytelling — info LEFT, reel RIGHT */}
+        <section className="reel-section reel-section--light section">
+          <div className="container">
+            <div className="reel-layout">
+              <div className="reel-info">
+                <span className="eyebrow reel-eyebrow-light">Storytelling</span>
+                <h2 className="heading-lg reel-heading-light">Horror Stories That <span className="reel-highlight-light">Keep Them Watching</span></h2>
+                <p className="lead reel-desc-light">Creepy AI visuals, perfectly timed captions, spine-chilling background music, and storylines that hook viewers from the first second.</p>
+                <ul className="reel-checks">
+                  {[
+                    { icon: <BookOpen size={16} />, text: 'Gripping storylines that hook instantly' },
+                    { icon: <Captions size={16} />, text: 'Perfectly timed captions & text' },
+                    { icon: <Volume2 size={16} />, text: 'Scary background music & sound design' },
+                    { icon: <Sparkles size={16} />, text: 'AI-generated horror visuals' },
+                  ].map((item) => (
+                    <li key={item.text} className="reel-check reel-check-light">
+                      <span className="check-icon">{item.icon}</span>
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="btn btn-primary">
+                  Start My Storytelling <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="reel-video">
+                <div className="reel-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/w-OH4jS7Fr4?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
+                    title="AI horror storytelling cut"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Marketing — info LEFT, reel RIGHT */}
+        <section className="reel-section reel-section--dark section">
+          <div className="container">
+            <div className="reel-layout">
+              <div className="reel-info">
+                <span className="eyebrow reel-eyebrow">Marketing Reels</span>
+                <h2 className="heading-lg reel-heading">Sell More Jerseys With <span className="reel-highlight">Scroll-Stopping Reels</span></h2>
+                <p className="lead reel-desc">We create fire promotional reels for clothing brands — jersey drops, product showcases, and hype edits that make your audience hit buy.</p>
+                <ul className="reel-checks">
+                  {[
+                    { icon: <ShoppingBag size={16} />, text: 'Product showcase reels that convert' },
+                    { icon: <Palette size={16} />, text: 'Edits that match your brand identity' },
+                    { icon: <TrendingUp size={16} />, text: 'Hype drops that build anticipation' },
+                    { icon: <Zap size={16} />, text: 'Scroll-stopping transitions & effects' },
+                  ].map((item) => (
+                    <li key={item.text} className="reel-check">
+                      <span className="check-icon">{item.icon}</span>
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="btn btn-primary">
+                  Promote My Brand <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="reel-video">
+                <div className="reel-wrapper">
+                  <iframe
+                    src="https://streamable.com/e/goh9v2"
+                    title="Clothing brand reel"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Contact />
-    </div>
+    </Layout>
   );
 }
 
