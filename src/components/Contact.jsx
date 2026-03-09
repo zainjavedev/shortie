@@ -3,7 +3,7 @@ import { useForm } from '@formspree/react';
 import { Mail, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const Contact = ({ id = 'contact', subject = 'Footer contact - Shortie lead', source = 'Footer form' }) => {
-    const [form, setForm] = useState({ message: '' });
+    const [form, setForm] = useState({ contact: '', message: '' });
     const [errors, setErrors] = useState({});
     const [state, submitToFormspree] = useForm('mblnjvoo');
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,7 +17,7 @@ const Contact = ({ id = 'contact', subject = 'Footer contact - Shortie lead', so
 
     const validate = () => {
         const nextErrors = {};
-        if (!form.message.trim()) nextErrors.message = 'Drop a handle or link so we can reach you.';
+        if (!form.contact.trim()) nextErrors.contact = 'Drop a handle or link so we can reach you.';
         return nextErrors;
     };
 
@@ -37,7 +37,7 @@ const Contact = ({ id = 'contact', subject = 'Footer contact - Shortie lead', so
     useEffect(() => {
         if (state.succeeded) {
             alert('Email sent successfully!');
-            setForm({ message: '' });
+            setForm({ contact: '', message: '' });
             setErrors({});
             setIsSubmitted(true);
             if (typeof window !== 'undefined') {
@@ -85,16 +85,28 @@ const Contact = ({ id = 'contact', subject = 'Footer contact - Shortie lead', so
                             <p className="form-subtitle">Discord, Reddit, WhatsApp, IG - anything. We'll find you and text you :)</p>
                         </div>
                         <label className="form-group">
-                            <span className="input-label">What kind of shorts do you want, and how should we reach you?</span>
+                            <span className="input-label">How should we reach you? <span className="required">*</span></span>
+                            <input
+                                type="text"
+                                placeholder="e.g. Discord: yourname#0001, WhatsApp: +1 555 123 4567, IG: @yourname"
+                                name="contact"
+                                required
+                                className={`input ${errors.contact ? 'input-error' : ''}`}
+                                value={form.contact}
+                                onChange={handleChange('contact')}
+                            />
+                            {errors.contact && <span className="error-text">{errors.contact}</span>}
+                        </label>
+                        <label className="form-group">
+                            <span className="input-label">What kind of shorts do you want?</span>
                             <textarea
-                                placeholder="e.g. Discord: yourname#0001, WhatsApp: +1 555 123 4567, Reddit: u/yourname"
-                                rows="6"
+                                placeholder="e.g. I run a SaaS and want punchy product demos, or I'm a fitness creator who needs daily Reels..."
+                                rows="4"
                                 name="message"
-                                className={`textarea ${errors.message ? 'input-error' : ''}`}
+                                className="textarea"
                                 value={form.message}
                                 onChange={handleChange('message')}
                             />
-                            {errors.message && <span className="error-text">{errors.message}</span>}
                         </label>
                         <div className="form-note">
                             We reply within one business day. No spam, ever.
